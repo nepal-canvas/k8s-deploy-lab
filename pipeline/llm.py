@@ -10,10 +10,16 @@ from . import config
 URL = "https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={key}"
 
 
+_FAIL_BUDGET = {"spent": 0.0}
+FAIL_BUDGET_S = 360   # at most 6 min per run waiting on Gemini errors, then give up loudly
+
+
 def ask_json(system: str, user: str, temperature=0.4) -> dict:
     last = None
     for model in config.GEMINI_MODELS:
         for attempt in range(2):
+            if _FAIL_BUDGET["spent"] > FAIL_BUDGET_S:
+                raise RuntimeError(f"Gemini keeps failing (quota/key?), giving up: {last}")
             try:
                 r = requests.post(
                     URL.format(model=model, key=config.GEMINI_API_KEY),
@@ -26,16 +32,18 @@ def ask_json(system: str, user: str, temperature=0.4) -> dict:
                     timeout=90,
                 )
                 if r.status_code == 429:
-                    last = "429"; time.sleep(60); continue
+                    last = f"429 {r.text[:150]}"; print(f"[llm] {model}: {last}")
+                    time.sleep(20); _FAIL_BUDGET["spent"] += 20
+                    break  # try the next model instead of waiting on this one
                 if r.status_code in (400, 403, 404):
-                    last = f"{r.status_code} {r.text[:120]}"; print(f"[llm] {model}: {last}"); break  # next model
+                    last = f"{r.status_code} {r.text[:150]}"; print(f"[llm] {model}: {last}"); break  # next model
                 r.raise_for_status()
                 text = r.json()["candidates"][0]["content"]["parts"][0]["text"]
                 text = re.sub(r"^```(json)?|```$", "", text.strip(), flags=re.M).strip()
                 return json.loads(text)
             except Exception as e:
-                last = str(e)
-                time.sleep(5)
+                last = str(e)[:200]; print(f"[llm] {model}: {last}")
+                time.sleep(5); _FAIL_BUDGET["spent"] += 5
     raise RuntimeError(f"Gemini failed: {last}")
 
 
