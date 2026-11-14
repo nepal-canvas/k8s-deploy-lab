@@ -29,8 +29,10 @@ def ask_json(system: str, user: str, temperature=0.4) -> dict:
                         "generationConfig": {"temperature": temperature,
                                              "responseMimeType": "application/json"},
                     },
-                    timeout=90,
+                    timeout=60,
                 )
+                if r.status_code >= 500:   # Gemini overloaded: another model is faster than waiting
+                    last = f"{r.status_code}"; print(f"[llm] {model}: {last}, trying next model"); break
                 if r.status_code == 429:
                     last = f"429 {r.text[:150]}"; print(f"[llm] {model}: {last}")
                     time.sleep(20); _FAIL_BUDGET["spent"] += 20
@@ -41,6 +43,10 @@ def ask_json(system: str, user: str, temperature=0.4) -> dict:
                 text = r.json()["candidates"][0]["content"]["parts"][0]["text"]
                 text = re.sub(r"^```(json)?|```$", "", text.strip(), flags=re.M).strip()
                 return json.loads(text)
+            except requests.exceptions.Timeout:
+                last = "timeout"; print(f"[llm] {model}: no answer in 60 s, trying next model")
+                _FAIL_BUDGET["spent"] += 60
+                break
             except Exception as e:
                 last = str(e)[:200]; print(f"[llm] {model}: {last}")
                 time.sleep(5); _FAIL_BUDGET["spent"] += 5
