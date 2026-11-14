@@ -25,8 +25,13 @@ PUNCH_SECS = 1.5      # giant key fact at second 0
 MAX_SHOT = 4.5
 
 
-def _run(cmd):
-    subprocess.run(cmd, check=True)
+def _run(cmd, limit=420):
+    """ffmpeg with a hard time limit and a timing line, so a slow or stuck step shows in the log."""
+    import time
+    t = time.time()
+    out = next((c for c in reversed(cmd) if isinstance(c, str) and "." in c[-6:]), "?")
+    subprocess.run(cmd, check=True, timeout=limit, stdin=subprocess.DEVNULL)
+    print(f"[render] {str(out).split('/')[-1]} {time.time() - t:.0f}s", flush=True)
 
 
 def _enc():
