@@ -20,7 +20,7 @@ permissions:
 concurrency: post-reel
 jobs:
   reel:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04   # pinned: the Ubuntu 26 image (rolled out from Oct 19) is untested here
     timeout-minutes: 35
     env:
       PYTHONUNBUFFERED: "1"   # show progress live, so a stuck run shows where it stuck
