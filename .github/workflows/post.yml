@@ -3,7 +3,7 @@ on:
   schedule:
     # Hourly Reels 06:00-22:00 Nepal time + extra breaking Reels. Main trigger: cron-job.org at :05 (slots) and :35 (breaking check).
     # This GitHub cron is only a backup (it is often late); runs with nothing due exit in seconds.
-    - cron: "50 * * * *"
+    - cron: "20,50 * * * *"   # every 30 min; works on its own if cron-job.org is down
   workflow_dispatch:
     inputs:
       when:
