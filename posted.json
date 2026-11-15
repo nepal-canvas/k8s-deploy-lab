@@ -877,5 +877,24 @@
   "state": "CLAIMED",
   "claimed_at": "2026-11-15T02:11:15+00:00",
   "run": "43666564696"
+ },
+ {
+  "id": "claim-brk-2026-11-15-0756",
+  "title": "",
+  "slot_key": "brk-2026-11-15-0756",
+  "state": "USED",
+  "claimed_at": "2026-11-15T02:11:15+00:00",
+  "run": "43666564696"
+ },
+ {
+  "id": "ee27ca7423d3",
+  "title": "छठ पर्वको मुख्य दिन आज, अस्ताउँदो सूर्यलाई अर्घ्य दिइँदै",
+  "fb_video_id": "2114594292520979",
+  "source": "Image Khabar",
+  "slot": "breaking",
+  "slot_key": "brk-2026-11-15-0756",
+  "state": "PUBLISHED",
+  "scheduled_for": null,
+  "published_at": "2026-11-15T02:19:25.990374+00:00"
  }
 ]
