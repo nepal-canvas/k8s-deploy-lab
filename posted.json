@@ -966,5 +966,24 @@
   "state": "CLAIMED",
   "claimed_at": "2026-11-16T01:26:22+00:00",
   "run": "43786261712"
+ },
+ {
+  "id": "claim-2026-11-16-0700",
+  "title": "",
+  "slot_key": "2026-11-16-0700",
+  "state": "USED",
+  "claimed_at": "2026-11-16T01:26:22+00:00",
+  "run": "43786261712"
+ },
+ {
+  "id": "c86b5402548a",
+  "title": "डेढ महिनापछि बेनी बजारमा खानेपानी आपूर्ति सुरु",
+  "fb_video_id": "1815242856191642",
+  "source": "Onlinekhabar",
+  "slot": "morning",
+  "slot_key": "2026-11-16-0700",
+  "state": "PUBLISHED",
+  "scheduled_for": null,
+  "published_at": "2026-11-16T01:36:27.127361+00:00"
  }
 ]
