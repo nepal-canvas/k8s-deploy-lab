@@ -1120,5 +1120,13 @@
   "state": "PUBLISHED",
   "scheduled_for": null,
   "published_at": "2026-11-17T11:30:46.512586+00:00"
+ },
+ {
+  "id": "claim-2026-11-17-1800",
+  "title": "",
+  "slot_key": "2026-11-17-1800",
+  "state": "CLAIMED",
+  "claimed_at": "2026-11-17T11:50:32+00:00",
+  "run": "44077609488"
  }
 ]
