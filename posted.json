@@ -1074,5 +1074,24 @@
   "state": "CLAIMED",
   "claimed_at": "2026-11-17T09:58:48+00:00",
   "run": "44059252245"
+ },
+ {
+  "id": "claim-2026-11-17-1600",
+  "title": "",
+  "slot_key": "2026-11-17-1600",
+  "state": "USED",
+  "claimed_at": "2026-11-17T09:58:48+00:00",
+  "run": "44059252245"
+ },
+ {
+  "id": "21d164ce07d1",
+  "title": "यी हुन् १९ विधामा सबैभन्दा बढी कर तिर्ने करदाता",
+  "fb_video_id": "1699143215196637",
+  "source": "Onlinekhabar",
+  "slot": "evening",
+  "slot_key": "2026-11-17-1600",
+  "state": "PUBLISHED",
+  "scheduled_for": null,
+  "published_at": "2026-11-17T10:08:15.343305+00:00"
  }
 ]
