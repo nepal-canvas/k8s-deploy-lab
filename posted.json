@@ -1192,7 +1192,7 @@
   "id": "claim-2026-11-17-2200",
   "title": "",
   "slot_key": "2026-11-17-2200",
-  "state": "CLAIMED",
+  "state": "RELEASED",
   "claimed_at": "2026-11-17T16:20:33+00:00",
   "run": "44124632451"
  },
