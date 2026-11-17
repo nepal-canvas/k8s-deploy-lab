@@ -1020,5 +1020,24 @@
   "state": "CLAIMED",
   "claimed_at": "2026-11-17T02:30:15+00:00",
   "run": "44003438889"
+ },
+ {
+  "id": "claim-brk-2026-11-17-0815",
+  "title": "",
+  "slot_key": "brk-2026-11-17-0815",
+  "state": "USED",
+  "claimed_at": "2026-11-17T02:30:15+00:00",
+  "run": "44003438889"
+ },
+ {
+  "id": "c0c0f847bfe9",
+  "title": "एनपीएल पहिलो क्वालिफायर आज : फाइनल प्रवेशका लागि लुम्बिनी र सुदूरपश्चिम भिड्दै",
+  "fb_video_id": "2609903526607692",
+  "source": "Onlinekhabar",
+  "slot": "breaking",
+  "slot_key": "brk-2026-11-17-0815",
+  "state": "PUBLISHED",
+  "scheduled_for": null,
+  "published_at": "2026-11-17T02:41:40.970847+00:00"
  }
 ]
