@@ -1012,5 +1012,13 @@
   "state": "SCHEDULED",
   "scheduled_for": "2026-11-16T15:00:00+05:45",
   "published_at": "2026-11-16T15:00:00+05:45"
+ },
+ {
+  "id": "claim-brk-2026-11-17-0815",
+  "title": "",
+  "slot_key": "brk-2026-11-17-0815",
+  "state": "CLAIMED",
+  "claimed_at": "2026-11-17T02:30:15+00:00",
+  "run": "44003438889"
  }
 ]
