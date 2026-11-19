@@ -17,10 +17,11 @@ from pathlib import Path
 NPT = timezone(timedelta(hours=5, minutes=45))
 # 10 a day, weighted to the evening: on this Page Reels posted 15:00-21:00 get ~200-320 plays,
 # morning/midday ones ~10. One morning and one lunch slot keep the Page alive during the day.
-KINDS = {7: "morning", 12: "publicinfo", 15: "politics", 16: "evening", 17: "politics",
-         18: "evening", 19: "politics", 20: "evening", 21: "politics", 22: "evening"}
+KINDS = {15: "politics", 16: "evening", 17: "politics", 18: "evening", 19: "politics", 20: "evening"}
+# 6 a day, 15:00-20:00 Nepal (09:15-14:15 UTC). Data (Nov 19): Reels posted 07:00-13:00 and after 21:00 mostly died (<30 plays);
+# 15:00-20:00 gave nearly every 200+ and all the 400-800 breakouts.
 SLOTS = [(h, 0, k) for h, k in KINDS.items()]
-BREAK_HOURS = range(6, 22)   # extra breaking Reels only while people are awake
+BREAK_HOURS = range(14, 21)   # extra breaking Reels only while people are awake
 BREAK_GAP = 180              # minutes between two breaking Reels
 BREAK_PER_DAY = 1            # breaking Reels under-perform here (43-58 plays): at most 1 a day
 BREAK_MAX_24H = 25           # total posts in 24 h before breaking checks stop (Meta cap is 30)
@@ -53,7 +54,7 @@ def due_slot(posted, now=None):
 
 
 def breaking_due(posted, now=None):
-    """A breaking check is allowed when no slot is due, during waking hours, not too soon after the last one."""
+    """A breaking check is allowed when no slot is due, during the 14:00-20:59 window that gets reach, not too soon after the last one."""
     now = now or datetime.now(NPT)
     if now.astimezone(NPT).hour not in BREAK_HOURS:
         return None

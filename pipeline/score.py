@@ -1,5 +1,6 @@
 """Score candidates 0-100 and pick one for the slot."""
 import json
+import re
 
 from . import config, llm, sources, trending
 
@@ -73,6 +74,18 @@ def _best_outlet(story, cands):
     return story
 
 
+# Topics that died on this Page (median 16 plays): never spend a slot on them unless it is a disaster.
+DEAD = re.compile(r"सुनको मूल्य|सुन(चाँदी)?को भाउ|चाँदी|तोलाको|मौसम|पश्चिमी वायु|चक्रवात|वर्षाको सम्भावना|"
+                  r"(?-i:PAN)|प्यान नम्बर|अनुमतिपत्र|नवीकरण|विद्युत् कटौती|बिजुली कटौती|लोडसेडिङ|करदाता|"
+                  r"भिटामिन|जुकाको औषधि|स्वास्थ्य सुझाव|यसरी (लिने|गर्ने|गर्नुहोस्)|gold price|weather", re.I)
+DEAD_OK = re.compile(r"मृत्यु|बाढी|पहिरो|भूकम्प|disaster|death", re.I)
+
+
+def _dead_topic(story):
+    t = f"{story.get('title', '')} {story.get('snippet', '')[:120]}"
+    return bool(DEAD.search(t)) and not DEAD_OK.search(t)
+
+
 def pick(cands, slot: str):
     if not cands:
         return None
@@ -111,6 +124,8 @@ def pick(cands, slot: str):
             continue
         if sc < config.MIN_SCORE or i >= len(cands):
             continue
+        if _dead_topic(cands[i]):
+            print(f"[score] skip low-reach topic: {cands[i]['title'][:60]}"); continue
         adj = sc - REPEAT_PENALTY * recent.count(cands[i]["source"])  # rotate outlets
         if best is None or adj > best[3]:
             best = (sc, i, row, adj)
