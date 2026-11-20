@@ -11,7 +11,8 @@
   "title": "समाचारको स्रोत पत्ता लगाउन समाचारकक्षमा प्रहरी छिरेको हो भने मुलुकमा संविधान सकियो : गाउँले",
   "fb_video_id": "1204861665812527",
   "slot": "politics",
-  "published_at": "2026-10-30T13:51:09.966193+00:00"
+  "published_at": "2026-10-30T13:51:09.966193+00:00",
+  "state": "DELETED"
  },
  {
   "id": "03c69ae48f7a",
@@ -75,7 +76,7 @@
   "fb_video_id": "1802932817581010",
   "slot": "politics",
   "slot_key": null,
-  "state": "PUBLISHED",
+  "state": "DELETED",
   "scheduled_for": null,
   "published_at": "2026-11-01T05:17:35.047124+00:00"
  },
@@ -85,7 +86,7 @@
   "fb_video_id": "1477440450918795",
   "slot": "publicinfo",
   "slot_key": "2026-11-01-1600",
-  "state": "PUBLISHED",
+  "state": "DELETED",
   "scheduled_for": null,
   "published_at": "2026-11-01T10:13:32.964856+00:00"
  },
@@ -95,7 +96,7 @@
   "fb_video_id": "4574029672869241",
   "slot": "breaking",
   "slot_key": "2026-11-01-1300",
-  "state": "SCHEDULED",
+  "state": "DELETED",
   "scheduled_for": "2026-11-01T13:00:00+05:45",
   "published_at": "2026-11-01T13:00:00+05:45"
  },
@@ -105,7 +106,7 @@
   "fb_video_id": "1105567635695365",
   "slot": "morning",
   "slot_key": "2026-11-02-0700",
-  "state": "PUBLISHED",
+  "state": "DELETED",
   "scheduled_for": null,
   "published_at": "2026-11-02T01:51:53.941616+00:00"
  },
@@ -115,7 +116,7 @@
   "fb_video_id": "1176189974742867",
   "slot": "politics",
   "slot_key": "2026-11-02-1000",
-  "state": "PUBLISHED",
+  "state": "DELETED",
   "scheduled_for": null,
   "published_at": "2026-11-02T04:44:10.905407+00:00"
  },
@@ -189,7 +190,7 @@
   "source": "Onlinekhabar",
   "slot": "publicinfo",
   "slot_key": "2026-11-03-1200",
-  "state": "PUBLISHED",
+  "state": "DELETED",
   "scheduled_for": null,
   "published_at": "2026-11-03T06:10:37.493325+00:00"
  },
@@ -252,7 +253,7 @@
   "source": "Onlinekhabar",
   "slot": "breaking",
   "slot_key": "2026-11-03-1300",
-  "state": "SCHEDULED",
+  "state": "DELETED",
   "scheduled_for": "2026-11-03T13:00:00+05:45",
   "published_at": "2026-11-03T13:00:00+05:45"
  },
@@ -263,7 +264,7 @@
   "source": "Onlinekhabar",
   "slot": "politics",
   "slot_key": "2026-11-03-1400",
-  "state": "SCHEDULED",
+  "state": "DELETED",
   "scheduled_for": "2026-11-03T14:00:00+05:45",
   "published_at": "2026-11-03T14:00:00+05:45"
  },
@@ -340,7 +341,7 @@
   "source": "Onlinekhabar English",
   "slot": "evening",
   "slot_key": "2026-11-03-2100",
-  "state": "SCHEDULED",
+  "state": "DELETED",
   "scheduled_for": "2026-11-03T21:00:00+05:45",
   "published_at": "2026-11-03T21:00:00+05:45"
  },
@@ -378,7 +379,7 @@
   "source": "BBC Nepali",
   "slot": "politics",
   "slot_key": "2026-11-04-0800",
-  "state": "PUBLISHED",
+  "state": "DELETED",
   "scheduled_for": null,
   "published_at": "2026-11-04T03:07:04.287784+00:00"
  },
@@ -488,7 +489,7 @@
   "source": "Onlinekhabar",
   "slot": "breaking",
   "slot_key": "2026-11-04-1000",
-  "state": "SCHEDULED",
+  "state": "DELETED",
   "scheduled_for": "2026-11-04T10:00:00+05:45",
   "published_at": "2026-11-04T10:00:00+05:45"
  },
@@ -542,7 +543,7 @@
   "source": "Onlinekhabar",
   "slot": "publicinfo",
   "slot_key": "2026-11-04-1200",
-  "state": "SCHEDULED",
+  "state": "DELETED",
   "scheduled_for": "2026-11-04T12:00:00+05:45",
   "published_at": "2026-11-04T12:00:00+05:45"
  },
@@ -569,7 +570,7 @@
   "source": "आन्तरिक राजस्व विभाग",
   "slot": "politics",
   "slot_key": "2026-11-04-1300",
-  "state": "SCHEDULED",
+  "state": "DELETED",
   "scheduled_for": "2026-11-04T13:00:00+05:45",
   "published_at": "2026-11-04T13:00:00+05:45"
  },
@@ -707,7 +708,7 @@
   "source": "Khabarhub",
   "slot": "politics",
   "slot_key": "2026-11-05-0800",
-  "state": "PUBLISHED",
+  "state": "DELETED",
   "scheduled_for": null,
   "published_at": "2026-11-05T03:07:52.361356+00:00"
  },
@@ -758,7 +759,7 @@
   "source": "Image Khabar",
   "slot": "breaking",
   "slot_key": "brk-2026-11-05-0935",
-  "state": "PUBLISHED",
+  "state": "DELETED",
   "scheduled_for": null,
   "published_at": "2026-11-05T04:08:25.084456+00:00"
  },
@@ -785,7 +786,7 @@
   "source": "Onlinekhabar",
   "slot": "breaking",
   "slot_key": "2026-11-05-1000",
-  "state": "SCHEDULED",
+  "state": "DELETED",
   "scheduled_for": "2026-11-05T10:00:00+05:45",
   "published_at": "2026-11-05T10:00:00+05:45"
  },
@@ -1257,7 +1258,7 @@
   "source": "Khabarhub",
   "slot": "breaking",
   "slot_key": "brk-2026-11-18-0835",
-  "state": "PUBLISHED",
+  "state": "DELETED",
   "scheduled_for": null,
   "published_at": "2026-11-18T03:20:33.663184+00:00"
  },
@@ -1284,7 +1285,7 @@
   "source": "Lokaantar",
   "slot": "morning",
   "slot_key": "2026-11-18-0700",
-  "state": "SCHEDULED",
+  "state": "DELETED",
   "scheduled_for": "2026-11-18T07:00:00+05:45",
   "published_at": "2026-11-18T07:00:00+05:45"
  },
@@ -1370,7 +1371,7 @@
   "source": "Ratopati",
   "slot": "publicinfo",
   "slot_key": "2026-11-18-1200",
-  "state": "SCHEDULED",
+  "state": "DELETED",
   "scheduled_for": "2026-11-18T12:00:00+05:45",
   "published_at": "2026-11-18T12:00:00+05:45"
  },
@@ -1451,7 +1452,7 @@
   "source": "यातायात व्यवस्था विभाग",
   "slot": "politics",
   "slot_key": "2026-11-18-2100",
-  "state": "PUBLISHED",
+  "state": "DELETED",
   "scheduled_for": null,
   "published_at": "2026-11-18T15:31:46.650659+00:00"
  },
@@ -1489,7 +1490,7 @@
   "source": "Lokaantar",
   "slot": "evening",
   "slot_key": "2026-11-18-2200",
-  "state": "PUBLISHED",
+  "state": "DELETED",
   "scheduled_for": null,
   "published_at": "2026-11-18T16:30:13.956245+00:00"
  },
@@ -1589,7 +1590,7 @@
   "source": "Ratopati",
   "slot": "morning",
   "slot_key": "2026-11-19-0700",
-  "state": "SCHEDULED",
+  "state": "DELETED",
   "scheduled_for": "2026-11-19T07:00:00+05:45",
   "published_at": "2026-11-19T07:00:00+05:45"
  },
@@ -1675,7 +1676,7 @@
   "source": "Nepal News",
   "slot": "publicinfo",
   "slot_key": "2026-11-19-1200",
-  "state": "SCHEDULED",
+  "state": "DELETED",
   "scheduled_for": "2026-11-19T12:00:00+05:45",
   "published_at": "2026-11-19T12:00:00+05:45"
  },
