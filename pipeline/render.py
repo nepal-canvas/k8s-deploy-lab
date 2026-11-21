@@ -56,24 +56,6 @@ def _brand(im):
         d.ellipse([76, 89, 92, 105], fill=(220, 20, 60, 255))
         d.text((104, 76), "NEPAL CANVAS", font=f, fill=(255, 255, 255, 235))
         _BRAND["png"] = b
-        face = Path(__file__).resolve().parent.parent / "assets" / "presenter.jpg"
-        if face.exists():  # the Page's original AI presenter (not a real person), labelled as AI
-            S = 170
-            av = Image.open(face).convert("RGBA").resize((S, S))
-            m = Image.new("L", (S, S), 0)
-            ImageDraw.Draw(m).ellipse([0, 0, S - 1, S - 1], fill=255)
-            av.putalpha(m)
-            p = Image.new("RGBA", (W, 420), (0, 0, 0, 0))
-            p.alpha_composite(b)
-            dp = ImageDraw.Draw(p)
-            dp.ellipse([54, 142, 66 + S, 154 + S], fill=(220, 20, 60, 255))
-            p.alpha_composite(av, (60, 148))
-            fs = visuals._font(24, latin=True)
-            lab = "AI-generated presenter"
-            lw = dp.textlength(lab, font=fs)
-            dp.rounded_rectangle([60, 334, 60 + lw + 28, 372], radius=10, fill=(10, 14, 26, 190))
-            dp.text((74, 338), lab, font=fs, fill=(255, 255, 255, 235))
-            _BRAND["png"] = p
     im.alpha_composite(_BRAND["png"], (0, 0))
 
 
@@ -278,6 +260,49 @@ def _scene_spans(scenes, sent_times, sentences, body_end):
     return spans
 
 
+ANCHOR = config.ASSETS / "anchor.jpg"   # the Page's original AI-generated presenter at the studio desk
+ANCHOR_IN, ANCHOR_OUT = 3.5, 2.8         # seconds on screen after the headline, and just before the end card
+
+
+def _label_png(path: Path) -> Path:
+    """'AI-generated presenter' tag shown whenever the presenter is on screen (top-left, under the brand)."""
+    im = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    d = ImageDraw.Draw(im)
+    f = visuals._font(28, latin=True)
+    lab = "AI-generated presenter"
+    lw = d.textlength(lab, font=f)
+    d.rounded_rectangle([60, 140, 60 + lw + 32, 186], radius=10, fill=(10, 14, 26, 190))
+    d.text((76, 145), lab, font=f, fill=(255, 255, 255, 235))
+    im.save(path)
+    return path
+
+
+def _anchor_windows(start: float, body_end: float, workdir: Path):
+    """Full-screen presenter shots laid over the base video: one right after the headline card,
+    one just before the end card (skipped if the Reel is too short). Returns (ffmpeg inputs,
+    filter prefix, label of the video to continue from). Input numbers start at 7."""
+    if not ANCHOR.exists():
+        return [], "", "0:v"
+    wins = [(start, start + ANCHOR_IN, "up")]
+    if body_end - ANCHOR_OUT > start + ANCHOR_IN + 3.0:
+        wins.append((body_end - ANCHOR_OUT, body_end, "down"))
+    if start + ANCHOR_IN > body_end - 1.0:
+        return [], "", "0:v"
+    ins, fc, cur = [], "", "0:v"
+    for k, (a, b, mv) in enumerate(wins):
+        clip = _shot_still(ANCHOR, b - a, workdir / f"anchor{k}.mp4", mv, scale=1.06)
+        ins += ["-i", str(clip)]
+        fc += (f"[{7 + k}:v]setpts=PTS-STARTPTS+{a:.3f}/TB[an{k}];"
+               f"[{cur}][an{k}]overlay=0:0:eof_action=pass:enable='between(t,{a:.3f},{b:.3f})'[ab{k}];")
+        cur = f"ab{k}"
+    lab = _label_png(workdir / "ai_label.png")
+    n = 7 + len(wins)
+    ins += ["-loop", "1", "-framerate", str(FPS), "-t", f"{body_end:.3f}", "-i", str(lab)]
+    on = "+".join(f"between(t,{a:.3f},{b:.3f})" for a, b, _ in wins)
+    fc += f"[{n}:v]format=rgba[lab];[{cur}][lab]overlay=0:0:eof_action=pass:enable='{on}'[anc];"
+    return ins, fc, "anc"
+
+
 def build(voice: Path, voice_len: float, sentences: list[str], shows: list[str],
           sent_times: list[tuple[float, float]], headline: str, kicker: str, end_card: Path,
           scenes: list[dict], workdir: Path, out: Path, template: str, punch: str = "") -> Path:
@@ -321,7 +346,8 @@ def build(voice: Path, voice_len: float, sentences: list[str], shows: list[str],
     p0 = PUNCH_SECS if punch else 0.0
     pun = _punch_png(punch, workdir / "punch.png")
     bed = _bed(workdir, total)
-    fc = (f"[1:v]format=rgba[s];[0:v][s]overlay=0:0:eof_action=pass[v1];"
+    anc_in, anc_fc, base = _anchor_windows(p0 + HOOK_SECS, body_end, workdir)
+    fc = (anc_fc + f"[1:v]format=rgba[s];[{base}][s]overlay=0:0:eof_action=pass[v1];"
           f"[2:v]format=rgba,fade=t=in:st={p0:.2f}:d=0.2:alpha=1,fade=t=out:st={p0 + HOOK_SECS - 0.4:.2f}:d=0.4:alpha=1[h];"
           f"[6:v]format=rgba,fade=t=out:st={max(p0 - 0.2, 0):.2f}:d=0.2:alpha=1[pu];"
           f"[v1][h]overlay=0:0:eof_action=pass:enable='gte(t,{p0:.2f})'[v1b];"
@@ -336,6 +362,7 @@ def build(voice: Path, voice_len: float, sentences: list[str], shows: list[str],
           "-i", str(voice), "-stream_loop", "-1", "-i", str(bed),
           "-f", "lavfi", "-i", f"color=c=0xDC143C:s={W}x10:r={FPS}:d={total:.3f}",
           "-loop", "1", "-framerate", str(FPS), "-t", f"{max(p0, 0.1):.2f}", "-i", str(pun),
+          *anc_in,
           "-filter_complex", fc, "-map", "[v]", "-map", "[a]",
           "-c:v", "libx264", "-preset", PRESET, "-crf", CRF, "-pix_fmt", "yuv420p", "-r", str(FPS),
           "-g", str(FPS * 2), "-c:a", "aac", "-ar", "48000", "-ac", "2", "-b:a", "160k",
