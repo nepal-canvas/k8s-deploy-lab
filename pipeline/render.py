@@ -56,6 +56,24 @@ def _brand(im):
         d.ellipse([76, 89, 92, 105], fill=(220, 20, 60, 255))
         d.text((104, 76), "NEPAL CANVAS", font=f, fill=(255, 255, 255, 235))
         _BRAND["png"] = b
+        face = Path(__file__).resolve().parent.parent / "assets" / "presenter.jpg"
+        if face.exists():  # the Page's original AI presenter (not a real person), labelled as AI
+            S = 170
+            av = Image.open(face).convert("RGBA").resize((S, S))
+            m = Image.new("L", (S, S), 0)
+            ImageDraw.Draw(m).ellipse([0, 0, S - 1, S - 1], fill=255)
+            av.putalpha(m)
+            p = Image.new("RGBA", (W, 420), (0, 0, 0, 0))
+            p.alpha_composite(b)
+            dp = ImageDraw.Draw(p)
+            dp.ellipse([54, 142, 66 + S, 154 + S], fill=(220, 20, 60, 255))
+            p.alpha_composite(av, (60, 148))
+            fs = visuals._font(24, latin=True)
+            lab = "AI-generated presenter"
+            lw = dp.textlength(lab, font=fs)
+            dp.rounded_rectangle([60, 334, 60 + lw + 28, 372], radius=10, fill=(10, 14, 26, 190))
+            dp.text((74, 338), lab, font=fs, fill=(255, 255, 255, 235))
+            _BRAND["png"] = p
     im.alpha_composite(_BRAND["png"], (0, 0))
 
 
