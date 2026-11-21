@@ -1971,5 +1971,13 @@
   "state": "PUBLISHED",
   "scheduled_for": null,
   "published_at": "2026-11-21T09:27:55.148805+00:00"
+ },
+ {
+  "id": "claim-2026-11-21-1600",
+  "title": "",
+  "slot_key": "2026-11-21-1600",
+  "state": "CLAIMED",
+  "claimed_at": "2026-11-21T09:50:39+00:00",
+  "run": "44891474904"
  }
 ]
