@@ -2040,6 +2040,14 @@
   "run": "44898640976"
  },
  {
+  "id": "claim-2026-11-21-1800",
+  "title": "",
+  "slot_key": "2026-11-21-1800",
+  "state": "USED",
+  "claimed_at": "2026-11-21T11:20:42+00:00",
+  "run": "44898640976"
+ },
+ {
   "id": "295b64f93fe9",
   "title": "दैलेखमा बञ्चरो प्रहारबाट दुई बालबालिकाको मृत्यु, एक जना पक्राउ",
   "fb_video_id": "1481766397234736",
@@ -2060,5 +2068,16 @@
   "state": "SCHEDULED",
   "scheduled_for": "2026-11-21T17:00:00+05:45",
   "published_at": "2026-11-21T17:00:00+05:45"
+ },
+ {
+  "id": "5948f95a60a7",
+  "title": "lumbini lions vs sudurpaschim royals",
+  "fb_video_id": "2174687196458713",
+  "source": "Google Trends Nepal",
+  "slot": "evening",
+  "slot_key": "2026-11-21-1800",
+  "state": "SCHEDULED",
+  "scheduled_for": "2026-11-21T18:00:00+05:45",
+  "published_at": "2026-11-21T18:00:00+05:45"
  }
 ]
