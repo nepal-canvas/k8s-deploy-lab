@@ -1949,7 +1949,7 @@
   "id": "claim-2026-11-21-1500",
   "title": "",
   "slot_key": "2026-11-21-1500",
-  "state": "CLAIMED",
+  "state": "RELEASED",
   "claimed_at": "2026-11-21T08:20:38+00:00",
   "run": "44884421852"
  }
