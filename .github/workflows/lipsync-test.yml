@@ -1,0 +1,44 @@
+name: lipsync-test
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262  # v4.4.0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg >/dev/null && nproc && free -g
+      - name: Install SadTalker
+        run: |
+          git clone -q --depth 1 https://github.com/OpenTalker/SadTalker st
+          pip install -q torch==2.0.1 torchvision==0.15.2 torchaudio==2.0.2 --index-url https://download.pytorch.org/whl/cpu
+          grep -v -i -E "gradio|^torch" st/requirements.txt > req.txt
+          pip install -q -r req.txt
+          pip install -q edge-tts
+          cd st && bash scripts/download_models.sh >/dev/null 2>&1; ls -la checkpoints gfpgan/weights || true
+      - name: Make a test voice
+        run: |
+          edge-tts --voice ne-NP-HemkalaNeural --text "नमस्कार, नेपाल क्यानभासमा स्वागत छ। आजको मुख्य समाचार: काठमाडौंमा आज ठूलो बैठक बस्यो र सरकारले नयाँ निर्णय गर्‍यो।" --write-media voice.mp3
+          ffmpeg -y -loglevel error -i voice.mp3 -ar 16000 -ac 1 voice.wav
+          ffprobe -v error -show_entries format=duration -of csv=p=0 voice.wav
+      - name: Lip-sync (timed)
+        run: |
+          cp assets/Gemini_Generated_Image_4kij614kij614kij.jpg anchor.jpg
+          cd st
+          s=$(date +%s)
+          python inference.py --driven_audio ../voice.wav --source_image ../anchor.jpg \
+            --result_dir ../out_still --still --preprocess full --size 256 --cpu 2>&1 | grep -v -E "^\s*$" | tail -25
+          echo "[lipsync] took $(( $(date +%s) - s ))s"
+          find ../out_still -name "*.mp4"
+      - name: Share result
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          mkdir -p share; i=0; for f in $(find out_* -name "*.mp4"); do i=$((i+1)); cp "$f" share/test_$i.mp4; done
+          ls share && gh release create "lipsync-${{ github.run_id }}" share/* --repo "${{ github.repository }}" --prerelease --title "lipsync test" --notes "test"
