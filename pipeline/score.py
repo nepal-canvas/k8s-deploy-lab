@@ -26,6 +26,25 @@ def _recent_titles(hours=72):
     return out[-60:]
 
 
+def _hits(hours=8, min_likes=7):
+    """Reels from the last few hours that are taking off. The app cannot read plays, so likes are the signal:
+    on this Page every Reel with 7+ likes had 400-1000 plays."""
+    from datetime import datetime, timedelta, timezone
+    from pathlib import Path
+    try:
+        stats = json.loads((Path(__file__).resolve().parent.parent / "stats.json").read_text())
+    except Exception:
+        return []
+    now, out = datetime.now(timezone.utc), []
+    for s in stats.values():
+        try:
+            if now - datetime.fromisoformat(s["published_at"]) < timedelta(hours=hours) and s.get("likes", 0) >= min_likes:
+                out.append(s.get("title", ""))
+        except Exception:
+            pass
+    return out
+
+
 def _recent_outlets(n=3):
     return [p.get("source", "") for p in sources.load_posted()[-n:]]
 
@@ -104,6 +123,9 @@ def pick(cands, slot: str):
         if len(cands) >= 40:
             break
     recent = _recent_outlets()
+    hits = _hits()
+    if hits:
+        print(f"[score] follow-up allowed for hits: {[h[:40] for h in hits]}")
     rows = [{"i": i, "source": s["source"], "category": s["category"], "title": s["title"],
              "snippet": s["text"][:300], "coverage": s.get("coverage", 0), "age_h": s.get("age_h"), "trend": s.get("trend", 0),
              "traffic": s.get("traffic", "")} for i, s in enumerate(cands)]
@@ -111,6 +133,7 @@ def pick(cands, slot: str):
         config.prompt("score"),
         json.dumps({"slot": slot, "preferred_categories": prefer, "trending_now": sources.TREND_CONTEXT,
                     "already_posted_last_3_days": _recent_titles(),
+                    "posted_last_24h": _recent_titles(24), "hits_to_follow_up": hits,
                     "candidates": rows}, ensure_ascii=False),
         temperature=0.2,
     )
@@ -134,7 +157,7 @@ def pick(cands, slot: str):
         print("[score] nothing >= MIN_SCORE")
         return None
     sc, i, row, _ = best
-    recent_titles = _recent_titles()
+    recent_titles = [t for t in _recent_titles() if t not in hits or not row.get("follow_up")]
     if _is_repeat(cands[i], recent_titles):  # try the next best ones
         ranked = sorted((r for r in scored if r is not row), key=lambda r: -int(r.get("score", 0) or 0))
         best = None

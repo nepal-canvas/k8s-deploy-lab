@@ -129,6 +129,8 @@ def _main():
     if story:
         pack = write.write(story)
         pack["id"] = story["id"]; pack["title"] = story["title"]; pack["link"] = story.get("link", "")
+    elif slot_key and not slot_key.startswith("link-"):
+        print("[main] no story scored high enough: slot skipped (no filler)"); return
     else:
         pack = write.finish(evergreen_item(posted))
         print(f"[main] evergreen: {pack['id']}")

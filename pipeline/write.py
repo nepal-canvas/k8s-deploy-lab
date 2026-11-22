@@ -6,8 +6,8 @@ import requests
 
 from . import config, llm, sources
 
-MIN_WORDS, MAX_WORDS = 60, 100
-TARGET = 80
+MIN_WORDS, MAX_WORDS = 48, 80   # Nov 22: ~25-35 s Reels are watched to the end more often
+TARGET = 62
 DIGIT_OR_LATIN = re.compile(r"[0-9०-९A-Za-z]")
 
 
@@ -53,12 +53,12 @@ def write(story: dict, shorter: bool = False) -> dict:
                "rss_text": story["text"], "article_text": article or story["text"],
                "trending_hashtags": [t for t in sources.TREND_CONTEXT.get("x_trends_nepal", []) if t.startswith("#")][:15]}
     if shorter:
-        payload["instruction"] = "Keep it to 65-75 words in total. Same facts only."
+        payload["instruction"] = "Keep it to 50-60 words in total. Same facts only."
     res = finish(llm.ask_json(config.prompt("write"), json.dumps(payload, ensure_ascii=False), temperature=0.5))
     w = _words(res)
     if not MIN_WORDS <= w <= MAX_WORDS:  # one rewrite pass towards the target length
         payload["previous_sentences"] = res.get("sentences", [])
-        payload["instruction"] = (f"The previous version had {w} words. Rewrite it to 70-90 words in total, "
+        payload["instruction"] = (f"The previous version had {w} words. Rewrite it to 55-70 words in total, "
                                   "same facts only, hook first, same JSON format.")
         res2 = finish(llm.ask_json(config.prompt("write"), json.dumps(payload, ensure_ascii=False), temperature=0.5))
         if abs(_words(res2) - TARGET) < abs(w - TARGET):

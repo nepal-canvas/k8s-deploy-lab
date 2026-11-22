@@ -13,7 +13,7 @@ POSTED = ROOT / "posted.json"
 NPT = timezone(timedelta(hours=5, minutes=45))
 
 MODE = os.getenv("MODE", "publish")  # publish | draft | dry
-MIN_SCORE = int(os.getenv("MIN_SCORE", "60"))
+MIN_SCORE = int(os.getenv("MIN_SCORE", "75"))  # Nov 22: skip a slot rather than post a weak story (aim: 1000+ plays each)
 MAX_POSTS_24H = int(os.getenv("MAX_POSTS_24H", "25"))  # Meta cap is 30
 MAX_AGE_HOURS = 12  # newest first; widened to 24/36 h only if fewer than 15 Nepal stories
 RECENT_DAYS = 7

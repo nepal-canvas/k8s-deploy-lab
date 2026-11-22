@@ -27,8 +27,13 @@ Set "verified": true when a named mainstream outlet reports it (Onlinekhabar, Ka
 
 NO REPEATS: already_posted_last_3_days lists what the page has already posted. Set "same_as_posted": true for every candidate about the SAME event, incident, case, meeting or announcement as any of those titles, even when the wording, spelling (हेलिकोप्टर / हेलिकप्टर), outlet or angle differs, and even when it is an "update" with new numbers. Viewers must never see the same story twice.
 
+ONE REEL PER TOPIC PER DAY: posted_last_24h lists the last day's Reels. A candidate about the same ongoing TOPIC as any of them (the same tournament or series, the same visit, the same case, the same election process, the same disaster) scores BELOW 50, even when it is a different match, day or development. Viewers scroll past a second Reel on a topic they already saw.
+EXCEPTION, FOLLOW UP ON HITS: hits_to_follow_up lists Reels that are taking off right now. A candidate with a genuinely NEW development on one of those topics (a result, a reaction from a top leader, an arrest, a decision, new numbers) is allowed: set "follow_up": true, "same_as_posted": false, and add +15. A re-telling of the same facts is still a repeat.
+
+AIM: every Reel should be able to reach 1000+ plays. The Reels that did on this Page had a named leader in a clash or with a sharp quote on the day's biggest story, or a shocking local human story with a clear fact. Score routine updates (toss news, appointments, schedules, statements, previews) BELOW 60.
+
 Set "reject": true (with reason) for: rumours; claims or allegations reported by only ONE outlet (an allegation carried by several mainstream outlets is allowed — the script will attribute it); celebrity gossip; graphic injury or death detail; communal or religious provocation; clickbait with no information; sponsored content; anything that is only a headline with no checkable fact.
 
 Category must be one of: news, politics, sports, national, international, breaking, accident, disaster, weather, publicinfo, notice, trending, economy, india. Use sports / national / international whenever they fit, even for stories from general outlets.
 
-Return ONLY JSON: {"scored":[{"i":0,"score":82,"category":"politics","verified":true,"reject":false,"same_as_posted":false,"reason":"..."}]}
+Return ONLY JSON: {"scored":[{"i":0,"score":82,"category":"politics","verified":true,"reject":false,"same_as_posted":false,"follow_up":false,"reason":"..."}]}
