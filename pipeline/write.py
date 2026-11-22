@@ -67,8 +67,12 @@ def write(story: dict, shorter: bool = False) -> dict:
     for s in res["sentences"]:
         if DIGIT_OR_LATIN.search(s["say"]):
             print(f"[write] digits/latin left in spoken text: {s['say'][:60]}")
-    topic = [h.replace(" ", "") for h in res.get("hashtags", []) if isinstance(h, str) and h.startswith("#")][:4]
-    tags = list(dict.fromkeys(["#Nepal", "#NepalNews"] + topic))[:6] + ["#NepalCanvas"]
+    junk = {"#news", "#viral", "#fyp", "#trending", "#reels", "#foryou", "#breaking"}
+    topic = [h.replace(" ", "") for h in res.get("hashtags", [])
+             if isinstance(h, str) and h.startswith("#") and 2 < len(h) <= 30 and h.lower() not in junk][:6]
+    genre = config.GENRE_TAGS.get(story.get("category", ""), "")
+    # specific tags first (they are what gets the Reel found), then genre and the Page's own tags; 9 at most
+    tags = list(dict.fromkeys(topic + ([genre] if genre else []) + ["#Nepal", "#NepalNews"]))[:8] + ["#NepalCanvas"]
     res["hashtags"] = list(dict.fromkeys(tags))
     res["punch"] = (res.get("punch") or "").strip()[:26]
     res["cards"] = [c[:60] for c in res.get("cards", [])][:4]

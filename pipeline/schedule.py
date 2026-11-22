@@ -17,7 +17,9 @@ from pathlib import Path
 NPT = timezone(timedelta(hours=5, minutes=45))
 # 10 a day, weighted to the evening: on this Page Reels posted 15:00-21:00 get ~200-320 plays,
 # morning/midday ones ~10. One morning and one lunch slot keep the Page alive during the day.
-KINDS = {15: "politics", 16: "evening", 17: "politics", 18: "evening", 19: "politics", 20: "evening"}
+KINDS = {15: "politics", 16: "sports", 17: "national", 18: "international", 19: "politics", 20: "evening"}
+# Genres (Nov 22): politics twice (best reach), sports (named players did well), national (society, economy,
+# development, local human stories), international (world news Nepalis care about), and one open "evening" slot.
 # 6 a day, 15:00-20:00 Nepal (09:15-14:15 UTC). Data (Nov 19): Reels posted 07:00-13:00 and after 21:00 mostly died (<30 plays);
 # 15:00-20:00 gave nearly every 200+ and all the 400-800 breakouts.
 SLOTS = [(h, 0, k) for h, k in KINDS.items()]

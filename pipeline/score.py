@@ -91,8 +91,9 @@ def pick(cands, slot: str):
         return None
     prefer = config.SLOTS[slot]["prefer"]
     # keep the prompt small: the 35 newest, most-covered stories (Indian outlets capped at 8)
-    nepal = [s for s in cands if s["category"] != "india"]
+    nepal = [s for s in cands if s["category"] not in ("india", "world")]
     india = [s for s in cands if s["category"] == "india"][:8]
+    india += [s for s in cands if s["category"] == "world"][:12 if slot == "international" else 6]
     allc = cands
     ordered = sorted(nepal[:120] + india, key=lambda s: (s.get("age_h", 99) > 12, -s.get("trend", 0), -s.get("coverage", 0), s.get("age_h", 99)))
     per, cands = {}, []

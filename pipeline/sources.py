@@ -34,6 +34,14 @@ SITES = [
     ("Image Khabar", "https://www.imagekhabar.com", "breaking", ["https://www.imagekhabar.com/feed/", "https://www.imagekhabar.com/rss"]),
     ("Google News Nepal", "https://news.google.com", "news", ["https://news.google.com/rss?hl=ne&gl=NP&ceid=NP:ne"]),
     ("Google Trends Nepal", "https://trends.google.com", "trending", ["https://trends.google.com/trending/rss?geo=NP"]),
+    # Sports: Nepali sports desks + international cricket/football
+    ("Onlinekhabar Sports", "https://www.onlinekhabar.com", "sports", ["https://www.onlinekhabar.com/content/sports/feed"]),
+    ("Kathmandu Post Sports", "https://kathmandupost.com/sports", "sports", ["https://kathmandupost.com/rss/sports"]),
+    ("ESPNcricinfo", "https://www.espncricinfo.com", "sports", ["https://www.espncricinfo.com/rss/content/story/feeds/0.xml"]),
+    ("BBC Sport", "https://www.bbc.com/sport", "sports", ["https://feeds.bbci.co.uk/sport/rss.xml"]),
+    # World: used for the international slot (see prompts/score.txt)
+    ("BBC World", "https://www.bbc.com/news/world", "world", ["https://feeds.bbci.co.uk/news/world/rss.xml"]),
+    ("Al Jazeera", "https://www.aljazeera.com", "world", ["https://www.aljazeera.com/xml/rss/all.xml"]),
     # India: used only when the story matters to Nepali viewers (see prompts/score.txt)
     ("ABP News", "https://www.abplive.com", "india", ["https://www.abplive.com/home/feed"]),
     ("NDTV", "https://www.ndtv.com", "india", ["https://feeds.feedburner.com/ndtvnews-top-stories"]),
@@ -240,7 +248,7 @@ def candidates(max_age_hours=None):
             if s["id"] in recent_ids or s["id"] in seen or datetime.fromisoformat(s["published"]) < cutoff:
                 continue
             seen.add(s["id"]); out.append(s)
-        if len([s for s in out if s["category"] != "india"]) >= 15:
+        if len([s for s in out if s["category"] not in ("india", "world")]) >= 15:
             break
     out.extend(s for s in fetch_dhm() if s["id"] not in recent_ids)
     for s in out:

@@ -32,6 +32,10 @@ FONT = ASSETS / "fonts" / "NotoSansDevanagari.ttf"
 FONT_LATIN = ASSETS / "fonts" / "NotoSans.ttf"
 
 BASE_HASHTAGS = ["#Nepal", "#NepalNews", "#NepalCanvas"]
+# one genre tag per Reel, picked from the story's category
+GENRE_TAGS = {"politics": "#NepalPolitics", "sports": "#NepalSports", "international": "#WorldNews",
+              "national": "#NepalToday", "economy": "#NepalEconomy", "disaster": "#NepalDisaster",
+              "accident": "#NepalToday", "breaking": "#BreakingNews", "india": "#WorldNews"}
 
 # slot -> categories the scorer prefers, and the fallback kind
 SLOTS = {
@@ -40,6 +44,9 @@ SLOTS = {
     "breaking":   {"prefer": ["breaking", "accident", "disaster"], "fallback": "trending"},
     "publicinfo": {"prefer": ["publicinfo", "notice"],   "fallback": "evergreen"},
     "evening":    {"prefer": ["news", "politics"],       "fallback": "any"},  # real news beats a tips Reel at prime time
+    "sports":     {"prefer": ["sports"],                 "fallback": "any"},
+    "national":   {"prefer": ["national", "economy", "news"], "fallback": "any"},
+    "international": {"prefer": ["international"],       "fallback": "any"},
 }
 
 

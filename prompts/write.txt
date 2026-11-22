@@ -18,12 +18,12 @@ Return ONLY JSON:
 {
  "punch": "<= 20 chars Nepali shown HUGE in the first 1.5 seconds: a named person + the striking word/number when the story has one ('ओली: \"थुन्दिन्छु\"', 'मिश्रा: २०५ रन'), else the single most striking verified fact, ideally a number with its unit in Devanagari digits ('रु. ५ अर्ब', '१२ जिल्लामा', '३ दिनदेखि अनशन') or a 2-4 word claim. No question marks, no exaggeration beyond the facts.",
  "headline": "<= 50 chars Nepali on-screen headline shown right after the punch; same promise as the hook",
- "kicker": "<= 20 chars label, e.g. राजनीति / मौसम / सूचना / अर्थतन्त्र",
+ "kicker": "<= 20 chars label, e.g. राजनीति / खेलकुद / राष्ट्रिय / विश्व / अर्थतन्त्र / सूचना",
  "sentences": [{"say": "...", "show": "..."}],
  "cards": ["3 short Nepali lines (<= 55 chars): key fact, key number/date, who/where"],
  "takeaway": "<= 60 chars: what it means for the viewer",
  "caption_ne": "3 short Nepali lines separated by \n: line 1 the hook with ONE emoji at the start (🔴 for breaking/politics, 📌 for public information, ⚠️ for weather/disaster); line 2 the key fact or why it matters; line 3 a short neutral question that invites comments",
  "caption_en": "one English line for the diaspora",
- "hashtags": ["3-4 topic hashtags, no spaces: the main person/place/institution in English (#BalenShah #SupremeCourtNepal #Kathmandu), ONE in Nepali script (#बालेन #सर्वोच्च), and at most ONE tag copied from trending_hashtags ONLY if it is clearly about this same story"],
+ "hashtags": ["4-6 specific hashtags, no spaces, most important first: (1) the main person or team in English as people search it (#BalenShah #RohitPaudel #NepalCricket #RealMadrid); (2) the place or institution (#Kathmandu #SupremeCourtNepal #Qatar); (3) the event or topic (#AsiaCup #NepalElection #ForeignEmployment); (4) ONE in Nepali script that Nepalis really type (#बालेन #क्रिकेट #नेपाल); (5) at most ONE tag copied from trending_hashtags ONLY if it is clearly about this same story. Never generic filler (#news #viral #fyp #trending), never made-up long tags, never a tag about a different story"],
  "keywords": ["3 ENGLISH stock-footage search terms that fit the story visually"]
 }
