@@ -125,10 +125,13 @@ def _main():
         if not story or story.get("category") not in ("breaking", "disaster", "accident", "politics", "weather", "notice"):
             print("[main] no genuinely breaking story right now"); return
     else:
+        if slot == "international":   # world stories rarely reach 75; a good one at 65 still beats a skipped slot
+            config.MIN_SCORE = min(config.MIN_SCORE, 65)
         story = score.pick(sources.candidates(), slot) if config.GEMINI_API_KEY else None
     if story:
         pack = write.write(story)
         pack["id"] = story["id"]; pack["title"] = story["title"]; pack["link"] = story.get("link", "")
+        pack["follow_up"] = story.get("follow_up", False)
     elif slot_key and not slot_key.startswith("link-"):
         print("[main] no story scored high enough: slot skipped (no filler)"); return
     else:
@@ -238,7 +241,7 @@ def _main():
         if slot_key and p.get("slot_key") == slot_key and p.get("state") == "CLAIMED":
             p["state"] = "USED"
     posted.append({"id": pack["id"], "title": pack.get("title", pack["headline"]), "fb_video_id": vid,
-                   "source": pack.get("source", ""),
+                   "source": pack.get("source", ""), "follow_up": pack.get("follow_up", False),
                    "slot": slot, "slot_key": (slot_key or None) if state != "DRAFT" else None, "state": state,
                    "scheduled_for": at.isoformat() if at else None,
                    "published_at": (at or datetime.now(timezone.utc)).isoformat()})

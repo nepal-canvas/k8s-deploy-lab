@@ -36,6 +36,13 @@ def _hits(hours=8, min_likes=7):
     except Exception:
         return []
     now, out = datetime.now(timezone.utc), []
+    for p in sources.load_posted():   # one follow-up per window: once one is posted, no more until it ages out
+        try:
+            if p.get("follow_up") and now - datetime.fromisoformat(p["published_at"]) < timedelta(hours=hours):
+                print(f"[score] follow-up already used: {p.get('title', '')[:50]}")
+                return []
+        except Exception:
+            pass
     for s in stats.values():
         try:
             if now - datetime.fromisoformat(s["published_at"]) < timedelta(hours=hours) and s.get("likes", 0) >= min_likes:
@@ -176,5 +183,6 @@ def pick(cands, slot: str):
         sc, i, row, _ = best
     s = dict(_best_outlet(cands[i], allc)); s["score"] = sc; s["category"] = row.get("category", s["category"])
     s["reason"] = row.get("reason", "")
+    s["follow_up"] = bool(row.get("follow_up")) and bool(hits)
     print(f"[score] picked {sc}: {s['title'][:70]}")
     return s
