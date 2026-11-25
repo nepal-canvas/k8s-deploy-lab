@@ -2782,6 +2782,14 @@
   "run": "45598804288"
  },
  {
+  "id": "claim-2026-11-25-1700",
+  "title": "",
+  "slot_key": "2026-11-25-1700",
+  "state": "USED",
+  "claimed_at": "2026-11-25T10:50:36+00:00",
+  "run": "45598804288"
+ },
+ {
   "id": "0fb1a6d1ad08",
   "title": "Moment Chinese space mission lifts off with first Pakistan astronaut aboard",
   "fb_video_id": "1172853171761557",
@@ -2792,5 +2800,17 @@
   "state": "SCHEDULED",
   "scheduled_for": "2026-11-25T13:00:00+05:45",
   "published_at": "2026-11-25T13:00:00+05:45"
+ },
+ {
+  "id": "06906deb681f",
+  "title": "नागरिक लगानी कोषको पुँजी १० अर्ब पुर्‍याउने प्रस्ताव, प्राइभेट इक्विटी र भेन्चर क्यापिटलमा लगानी खोलिने",
+  "fb_video_id": "3051970791807260",
+  "source": "Ratopati",
+  "follow_up": false,
+  "slot": "evening",
+  "slot_key": "2026-11-25-1700",
+  "state": "SCHEDULED",
+  "scheduled_for": "2026-11-25T17:00:00+05:45",
+  "published_at": "2026-11-25T17:00:00+05:45"
  }
 ]
