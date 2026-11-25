@@ -2640,5 +2640,25 @@
   "state": "CLAIMED",
   "claimed_at": "2026-11-25T00:20:41+00:00",
   "run": "45517318191"
+ },
+ {
+  "id": "claim-2026-11-25-0700",
+  "title": "",
+  "slot_key": "2026-11-25-0700",
+  "state": "USED",
+  "claimed_at": "2026-11-25T00:20:41+00:00",
+  "run": "45517318191"
+ },
+ {
+  "id": "c9bf9edc2ad8",
+  "title": "प्रहरीका ६० जना एसपीको सरुवा, १७ जिल्लाका इन्चार्ज फेरिए (सूचीसिहत)",
+  "fb_video_id": "1478494937593062",
+  "source": "Ratopati",
+  "follow_up": false,
+  "slot": "national",
+  "slot_key": "2026-11-25-0700",
+  "state": "SCHEDULED",
+  "scheduled_for": "2026-11-25T07:00:00+05:45",
+  "published_at": "2026-11-25T07:00:00+05:45"
  }
 ]
