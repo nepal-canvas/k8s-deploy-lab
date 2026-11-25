@@ -2734,6 +2734,14 @@
   "run": "45559873327"
  },
  {
+  "id": "claim-2026-11-25-1300",
+  "title": "",
+  "slot_key": "2026-11-25-1300",
+  "state": "USED",
+  "claimed_at": "2026-11-25T06:20:37+00:00",
+  "run": "45559873327"
+ },
+ {
   "id": "c9bf9edc2ad8",
   "title": "प्रहरीका ६० जना एसपीको सरुवा, १७ जिल्लाका इन्चार्ज फेरिए (सूचीसिहत)",
   "fb_video_id": "1478494937593062",
@@ -2756,5 +2764,17 @@
   "state": "SCHEDULED",
   "scheduled_for": "2026-11-25T09:00:00+05:45",
   "published_at": "2026-11-25T09:00:00+05:45"
+ },
+ {
+  "id": "0fb1a6d1ad08",
+  "title": "Moment Chinese space mission lifts off with first Pakistan astronaut aboard",
+  "fb_video_id": "1172853171761557",
+  "source": "BBC World",
+  "follow_up": false,
+  "slot": "international",
+  "slot_key": "2026-11-25-1300",
+  "state": "SCHEDULED",
+  "scheduled_for": "2026-11-25T13:00:00+05:45",
+  "published_at": "2026-11-25T13:00:00+05:45"
  }
 ]
