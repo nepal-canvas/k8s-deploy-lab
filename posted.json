@@ -2653,7 +2653,7 @@
   "id": "claim-brk-2026-11-25-0635",
   "title": "",
   "slot_key": "brk-2026-11-25-0635",
-  "state": "CLAIMED",
+  "state": "RELEASED",
   "claimed_at": "2026-11-25T00:50:39+00:00",
   "run": "45521214451"
  },
