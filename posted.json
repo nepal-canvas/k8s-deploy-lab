@@ -2774,6 +2774,14 @@
   "run": "45589219637"
  },
  {
+  "id": "claim-2026-11-25-1700",
+  "title": "",
+  "slot_key": "2026-11-25-1700",
+  "state": "CLAIMED",
+  "claimed_at": "2026-11-25T10:20:41+00:00",
+  "run": "45594042502"
+ },
+ {
   "id": "0fb1a6d1ad08",
   "title": "Moment Chinese space mission lifts off with first Pakistan astronaut aboard",
   "fb_video_id": "1172853171761557",
