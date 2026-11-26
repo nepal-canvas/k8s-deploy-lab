@@ -39,7 +39,8 @@ def _wrap(draw, text, font, max_w):
     return lines
 
 
-def card(text: str, path: Path, template: str, kicker: str = "", small: str = "", logo: Path | None = None):
+def card(text: str, path: Path, template: str, kicker: str = "", small: str = "", logo: Path | None = None,
+         follow: bool = False):
     bg, fg, acc = {"navy": (NAVY, CREAM, RED), "cream": (CREAM, NAVY, RED), "split": (NAVY2, CREAM, RED)}[template]
     im = Image.new("RGB", (W, H), bg)
     d = ImageDraw.Draw(im)
@@ -54,6 +55,13 @@ def card(text: str, path: Path, template: str, kicker: str = "", small: str = ""
         y += 110
     if small:
         d.text((80, H - 260), small, font=_font(38), fill=GREY if template != "cream" else NAVY2)
+    if follow:   # end card: ask the viewer to follow, above the source line (clear of the Reels buttons)
+        fb = _font(54)
+        msg = "+ फलो गर्नुहोस्: Nepal Canvas"
+        tw = d.textlength(msg, font=fb)
+        x0, y0 = 80, H - 470
+        d.rounded_rectangle([x0, y0, x0 + tw + 70, y0 + 96], radius=48, fill=acc)
+        d.text((x0 + 35, y0 + 14), msg, font=fb, fill=(255, 255, 255))
     im.save(path)
     return path
 

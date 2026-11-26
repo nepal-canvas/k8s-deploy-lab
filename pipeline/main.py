@@ -18,6 +18,10 @@ from . import config, facebook, infocards, link, render, scenes, schedule, score
 MAX_VOICE = 83.0  # LEAD + voice + TAIL + OUTRO must stay under 90 s
 
 
+# Nov 26: every Reel ends by asking the viewer to follow (spoken + end card + caption)
+FOLLOW_CTA = {"say": "यस्तै छोटो समाचारका लागि नेपाल क्यानभास फलो गर्नुहोस्।",
+              "show": "यस्तै छोटो समाचारका लागि Nepal Canvas फलो गर्नुहोस्"}
+
 def posts_last_24h(posted):
     cut = datetime.now(timezone.utc) - timedelta(hours=24)
     return sum(1 for p in posted if p.get("published_at") and datetime.fromisoformat(p["published_at"]) > cut)
@@ -142,6 +146,9 @@ def _main():
     voice = work / "voice.mp3"
     t0 = time.time()
     for attempt in range(2):
+        if not any(s.get("say") == FOLLOW_CTA["say"] for s in pack["sentences"]):   # last words: ask to follow
+            pack["sentences"].append(dict(FOLLOW_CTA))
+            pack["script"] = pack["script"].rstrip() + " " + FOLLOW_CTA["say"]
         says = [s["say"] for s in pack["sentences"]]
         try:
             vlen = tts.synth(pack["script"], voice, says)
@@ -170,7 +177,7 @@ def _main():
     # scene plan: what is on screen while each sentence is spoken
     tpl = random.choice(visuals.TEMPLATES)
     end_card = visuals.card(pack.get("takeaway", ""), work / "c_end.png", tpl, kicker="तपाईंका लागि",
-                            small=f"स्रोत: {pack['source']}")
+                            small=f"स्रोत: {pack['source']}", follow=True)
     try:
         plan = scenes.plan(pack["script"], pack["headline"], pack.get("category", "news")) if config.GEMINI_API_KEY else []
     except Exception as e:
@@ -210,6 +217,7 @@ def _main():
     credits = [c for c in (work / "credits.txt").read_text(encoding="utf-8").splitlines() if c.strip()]
     photo_line = ("\nतस्बिर: " + "; ".join(credits[:5])) if credits else ""
     caption = f"{pack.get('caption_ne', pack['headline']).strip()}\n\n{pack.get('caption_en', '').strip()}\n\n" \
+              f"👉 दिनभरका मुख्य खबर छोटोमा: Nepal Canvas फलो गर्नुहोस्\n\n" \
               f"स्रोत: {pack['source']}{photo_line}\n\n{' '.join(pack['hashtags'])}"
     (work / "caption.txt").write_text(caption, encoding="utf-8")
     print("[main] caption:\n" + caption)
