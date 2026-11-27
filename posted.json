@@ -3016,5 +3016,25 @@
   "state": "CLAIMED",
   "claimed_at": "2026-11-27T00:20:38+00:00",
   "run": "45916151186"
+ },
+ {
+  "id": "claim-2026-11-27-0700",
+  "title": "",
+  "slot_key": "2026-11-27-0700",
+  "state": "USED",
+  "claimed_at": "2026-11-27T00:20:38+00:00",
+  "run": "45916151186"
+ },
+ {
+  "id": "a47eb8c6d4c3",
+  "title": "साउदी अरबमा आक्रमण हुँदा एक नेपालीको मृत्यु, तीन घाइते",
+  "fb_video_id": "1690312575886123",
+  "source": "Nepal News",
+  "follow_up": false,
+  "slot": "national",
+  "slot_key": "2026-11-27-0700",
+  "state": "SCHEDULED",
+  "scheduled_for": "2026-11-27T07:00:00+05:45",
+  "published_at": "2026-11-27T07:00:00+05:45"
  }
 ]
