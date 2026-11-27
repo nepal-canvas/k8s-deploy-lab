@@ -3150,6 +3150,14 @@
   "run": "45981279787"
  },
  {
+  "id": "claim-2026-11-27-1700",
+  "title": "",
+  "slot_key": "2026-11-27-1700",
+  "state": "USED",
+  "claimed_at": "2026-11-27T10:20:38+00:00",
+  "run": "45981279787"
+ },
+ {
   "id": "ca0eeb4c852a",
   "title": "NPL franchises agree to build home grounds under PPP model as league eyes multi-venue format",
   "fb_video_id": "2048217439176797",
@@ -3184,5 +3192,17 @@
   "state": "SCHEDULED",
   "scheduled_for": "2026-11-27T15:00:00+05:45",
   "published_at": "2026-11-27T15:00:00+05:45"
+ },
+ {
+  "id": "5bc510c01286",
+  "title": "रविले भेटेलगत्तै राष्ट्रपति पौडेल भेट्न प्रधानमन्त्री शाह शीतल निवासमा",
+  "fb_video_id": "1909643137145093",
+  "source": "Ratopati",
+  "follow_up": false,
+  "slot": "evening",
+  "slot_key": "2026-11-27-1700",
+  "state": "SCHEDULED",
+  "scheduled_for": "2026-11-27T17:00:00+05:45",
+  "published_at": "2026-11-27T17:00:00+05:45"
  }
 ]
